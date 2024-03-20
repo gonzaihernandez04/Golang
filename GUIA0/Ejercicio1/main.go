@@ -4,7 +4,7 @@ import "fmt"
 
 func main() {
 
-	coeficientes := []float64{3.0, -2.0, 1.0}
+	coeficientes := []float64{-3.0, -2.0, 5.0, 6.0}
 	fmt.Println(imprimirPolinomio(coeficientes))
 }
 
@@ -16,16 +16,19 @@ func imprimirPolinomio(coeficientes []float64) string {
 	for i := len(coeficientes) - 1; i >= 0; i-- {
 		coeficiente := coeficientes[i]
 		var strCadena string
-		if coeficiente > 0 && i != 0 {
+		if coeficiente > 0 && i != len(coeficientes)-1 {
 			signo = "+"
 		} else if coeficiente < 0 {
 			signo = "-"
 			coeficiente = -coeficiente
 		}
 		if i < grado {
-			strCadena = fmt.Sprintf("x^%d", grado-i)
-		} else if i == 1 {
-			strCadena = ""
+			if grado-i == 1 {
+				strCadena = "x"
+			} else {
+				strCadena = fmt.Sprintf("x^%d", grado-i)
+
+			}
 
 		}
 		resultado += fmt.Sprintf(" %s %.1f%s", signo, coeficiente, strCadena)
