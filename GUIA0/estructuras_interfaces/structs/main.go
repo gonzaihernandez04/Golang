@@ -1,0 +1,5 @@
+package figuras
+
+func main() {
+
+}
