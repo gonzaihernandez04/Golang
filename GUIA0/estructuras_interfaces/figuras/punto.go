@@ -15,6 +15,13 @@ func (p *Punto) Mover(x, y int) {
 	p.y += y
 }
 
+func (p Punto) getX() int {
+	return p.x
+}
+
+func (p Punto) getY() int {
+	return p.y
+}
 func (p Punto) String() string {
 	return fmt.Sprintf("(%v, %v)", p.x, p.y)
 }
