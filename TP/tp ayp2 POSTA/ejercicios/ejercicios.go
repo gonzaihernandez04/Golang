@@ -289,7 +289,7 @@ func ExisteTipoDeEjercicio(tiposEjercicioBuscado []string) bool {
 	// Hago funcion contains tipo con un mapa para evitar el n al cuadrado por O(1) al acceso de datos en mapa
 	existe := containsTipo(tipos, tiposEjercicioBuscado)
 
-	// TODO debe verificarse que existan ejercicios con ese tipo.
+	// TODO debe verificarse que existan ejercicios con ese tipo. Generar rutina automatica
 	return existe
 
 }
