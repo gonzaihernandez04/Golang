@@ -385,7 +385,7 @@ func generacionAutomagicaDeRutinas3() {
 
 		} else {
 
-			fmt.Printf("Elegiste | Nombre %v, Duracion Maxima %v, Tipo de maximizacion %v", nombre, duracionMaximaRutina, tipoEjercicio)
+			fmt.Printf("Elegiste | Nombre %v, Duracion Maxima: %v horas, Tipo de maximizacion: %v", nombre, duracionMaximaRutina, tipoEjercicio)
 
 			fin = true
 		}
