@@ -1,0 +1,4 @@
+nombre,descripcion,tiempoEstimado,caloriasQuemadas,tipoEjericio,puntosPorTipoEjercicio,dificultad
+press de hombro,Hacer fuerza con los hombros,70,500,"[""hombros""]",[2],1
+biceps,Hacer fuerza con los biceps,20,100,"[""brazos"",""fuerza""]","[1,2]",1
+sentadilla,Hacer fuerza con las piernas,40,200,"[""fuerza"",""piernas""]","[2,2]",2
