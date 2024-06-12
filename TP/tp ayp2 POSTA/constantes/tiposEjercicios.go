@@ -10,4 +10,5 @@ const (
 	PIERNAS      = "Piernas"
 	ESPALDA      = "Espalda"
 	CARDIO       = "Cardio"
+	BRAZOS       = "Brazos"
 )

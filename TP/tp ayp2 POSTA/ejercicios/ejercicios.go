@@ -264,13 +264,16 @@ func ListarEjercicios(tipoEjercicioBuscado string, dificultadBuscada int) {
 }
 
 // Crea funcion para generacion de rutinas automaticas que verifica si existe un tipo de ejercicio
-func ExisteTipoDeEjercicio(tipoEjercicioBuscado string) bool {
+func ExisteTipoDeEjercicio(tiposEjercicioBuscado []string) bool {
 
 	// Transformo siempre la primera letra en mayuscula
-	runas := []rune(tipoEjercicioBuscado)
-	runas[0] = unicode.ToUpper(runas[0])
-	tipoEjercicioBuscado = string(runas)
+	for i, tipo := range tiposEjercicioBuscado {
+		runas := []rune(tipo)
+		runas[0] = unicode.ToUpper(runas[0])
+		tiposEjercicioBuscado[i] = string(runas)
+	}
 
+	//Un posible refactor es crear un diccionario con todos los tipos y verificar si el que ingresa el usuario existe como tipo
 	tipos := []string{
 		enums.FUERZA,
 		enums.AGILIDAD,
@@ -282,16 +285,31 @@ func ExisteTipoDeEjercicio(tipoEjercicioBuscado string) bool {
 		enums.ESPALDA,
 		enums.CARDIO,
 	}
-	for _, tipo := range tipos {
-		if tipo == tipoEjercicioBuscado {
-			return true
-		}
-	}
 
-	return false
+	// Hago funcion contains tipo con un mapa para evitar el n al cuadrado por O(1) al acceso de datos en mapa
+	existe := containsTipo(tipos, tiposEjercicioBuscado)
+
+	// TODO debe verificarse que existan ejercicios con ese tipo.
+	return existe
 
 }
 
+func containsTipo(tipos []string, tiposEjercicioBuscado []string) bool {
+	tipoMap := make(map[string]bool, len(tiposEjercicioBuscado))
+
+	for _, tipoBuscado := range tiposEjercicioBuscado {
+		tipoMap[tipoBuscado] = true
+	}
+
+	// Verificar si alguno de los tipos está en el mapa
+	for _, tipo := range tipos {
+		// utilizo la clave tipo para verificar que exista en el mapa
+		if _, found := tipoMap[tipo]; found {
+			return true
+		}
+	}
+	return false
+}
 func ListarTodosEjercicios() []*Ejercicio {
 	// ruta := "ejercicios/ejercicios.csv"
 	ruta, _ := funcionesCSV.BuscarArchivoCSV("ejercicios.csv")
@@ -327,10 +345,10 @@ func ModificarEjercicio(nombre string, nuevoEjercicio *Ejercicio) {
 }
 
 func main() {
-	nuevoEjercicio1 := NuevoEjercicio("Sentadilla", "Hacer fuerza con las piernas", 40, 200, []string{"fuerza", "piernas"}, []int{2, 2}, enums.INTERMEDIO)
+	nuevoEjercicio1 := NuevoEjercicio("Sentadilla", "Hacer fuerza con las piernas", 40, 200, []string{enums.FUERZA, enums.PIERNAS}, []int{2, 2}, enums.INTERMEDIO)
 
-	nuevoEjercicio2 := NuevoEjercicio("Press de hombro", "Hacer fuerza con los hombros", 70, 500, []string{"hombros"}, []int{2}, enums.PRINCIPIANTE)
-	nuevoEjercicio3 := NuevoEjercicio("Biceps", "Hacer fuerza con los biceps", 20, 100, []string{"brazos", "fuerza"}, []int{1, 2}, enums.PRINCIPIANTE)
+	nuevoEjercicio2 := NuevoEjercicio("Press de hombro", "Hacer fuerza con los hombros", 70, 500, []string{enums.HOMBROS}, []int{2}, enums.PRINCIPIANTE)
+	nuevoEjercicio3 := NuevoEjercicio("Biceps", "Hacer fuerza con los biceps", 20, 100, []string{enums.BRAZOS, enums.FUERZA}, []int{1, 2}, enums.PRINCIPIANTE)
 
 	AltaEjercicio(nuevoEjercicio1)
 	AltaEjercicio(nuevoEjercicio1)

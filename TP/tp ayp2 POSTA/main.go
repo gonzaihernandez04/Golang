@@ -365,7 +365,7 @@ func generacionAutomagicaDeRutinas3() {
 	fmt.Scanln(&nombre)
 
 	for !fin {
-		fmt.Printf("Ingrese la duracion maxima de la rutina(entre 1 y 3): ")
+		fmt.Printf("\n Ingrese la duracion maxima de la rutina(entre 1 y 3): ")
 
 		// Se usa scanf debido a que scanln tiene un error de no esperar el valor y si no se introduce genera problemas o comportamientos extraños. Tambien el buffer puede tener datos ya guardados que no se liberan, entonces el while imprime muchas veces el mensaje de ingrese la duracion maxima
 		fmt.Scanf("%d\n", &duracionMaximaRutina)
@@ -375,9 +375,10 @@ func generacionAutomagicaDeRutinas3() {
 		}
 
 		// Verificar que existan los tipos
-		fmt.Printf("Que desea maximizar? (Fuerza, Resistencia, Flexibilidad,Cardio,Hombros,Biceps,Pecho,Piernas,Espalda,Gemelos,Gluteos): ")
+		fmt.Printf("Que desea maximizar? (Fuerza, Resistencia, Flexibilidad,Cardio,Hombros,Biceps,Pecho,Piernas,Espalda,Gemelos,Gluteos): Separados por coma \n")
 		fmt.Scanln(&tipoEjercicio)
-		existe := ejercicios.ExisteTipoDeEjercicio(tipoEjercicio)
+		tiposElegidos := strings.Split(tipoEjercicio, ",")
+		existe := ejercicios.ExisteTipoDeEjercicio(tiposElegidos)
 
 		if !existe {
 			fin = false
